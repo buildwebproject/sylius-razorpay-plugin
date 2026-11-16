@@ -1,0 +1,35 @@
+{
+    "name": "buildwebproject/sylius-razorpay-plugin",
+    "type": "sylius-plugin",
+    "description": "Razorpay Standard Checkout for Sylius 2: UPI, cards, netbanking and wallets, signed webhooks, reconciliation and automatic refunds, built on the Sylius Payment Request API.",
+    "keywords": ["sylius", "sylius-plugin", "razorpay", "payment", "upi", "india", "payment-gateway", "checkout"],
+    "homepage": "https://buildwebproject.com/plugins/razorpay-checkout/",
+    "license": "MIT",
+    "authors": [{"name": "BuildWebProject", "homepage": "https://buildwebproject.com"}],
+    "support": {
+        "issues": "https://github.com/buildwebproject/sylius-razorpay-plugin/issues",
+        "source": "https://github.com/buildwebproject/sylius-razorpay-plugin"
+    },
+    "require": {
+        "php": "^8.2",
+        "sylius/sylius": "^2.1",
+        "symfony/http-client": "^6.4 || ^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5 || ^11.0"
+    },
+    "suggest": {
+        "sylius/refund-plugin": "Refunds from credit memos are sent to Razorpay automatically."
+    },
+    "autoload": {
+        "psr-4": {"BuildWebProject\\SyliusRazorpayPlugin\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"Tests\\BuildWebProject\\SyliusRazorpayPlugin\\": "tests/"}
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {"php-http/discovery": false, "symfony/flex": false, "symfony/thanks": false}
+    },
+    "extra": {"branch-alias": {"dev-main": "1.0-dev"}}
+}

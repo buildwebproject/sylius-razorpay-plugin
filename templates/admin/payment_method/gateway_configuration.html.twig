@@ -1,0 +1,21 @@
+{% set form = hookable_metadata.context.form %}
+{% set config = form.gatewayConfig.config %}
+{% set code = form.vars.data.code ?: 'PAYMENT_METHOD_CODE' %}
+
+<div class="col-12" data-test-razorpay-config>
+    <h3 class="mt-2 mb-3">Razorpay</h3>
+    <div class="alert alert-info mb-4">
+        <div class="w-100">
+        <div class="fw-semibold mb-1">{{ 'buildwebproject_sylius_razorpay.form.webhook_title'|trans }}</div>
+        <div class="mb-1"><code class="user-select-all">{{ url('buildwebproject_razorpay_webhook', { code: code }) }}</code></div>
+        <div class="small">{{ 'buildwebproject_sylius_razorpay.form.webhook_events'|trans }}: <code>payment.authorized, payment.captured, order.paid, refund.processed, refund.failed</code></div>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-4">{{ form_row(config.mode) }}</div>
+<div class="col-12 col-md-8">{{ form_row(config.key_id) }}</div>
+<div class="col-12 col-md-6">{{ form_row(config.key_secret) }}</div>
+<div class="col-12 col-md-6">{{ form_row(config.webhook_secret) }}</div>
+<div class="col-12">{{ form_row(config.methods) }}</div>
+<div class="col-12 col-md-8">{{ form_row(config.merchant_name) }}</div>
+<div class="col-12 col-md-4">{{ form_row(config.theme_color) }}</div>

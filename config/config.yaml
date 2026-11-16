@@ -1,0 +1,8 @@
+# Import from config/packages/buildwebproject_sylius_razorpay.yaml (see README).
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.payment_method.create.content.form.sections.gateway_configuration.razorpay': &razorpay_form
+            buildwebproject_razorpay:
+                template: '@BuildWebProjectSyliusRazorpayPlugin/admin/payment_method/gateway_configuration.html.twig'
+                priority: 0
+        'sylius_admin.payment_method.update.content.form.sections.gateway_configuration.razorpay': *razorpay_form

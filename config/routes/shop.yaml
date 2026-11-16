@@ -1,0 +1,15 @@
+# Import without a prefix, see README.
+buildwebproject_razorpay_checkout:
+    path: /{_locale}/razorpay/checkout/{hash}
+    methods: [GET, POST]
+    controller: BuildWebProject\SyliusRazorpayPlugin\Controller\CheckoutController
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+        hash: '[A-Za-z0-9-]{8,64}'
+
+buildwebproject_razorpay_webhook:
+    path: /payment/razorpay/webhook/{code}
+    methods: [POST]
+    controller: BuildWebProject\SyliusRazorpayPlugin\Controller\WebhookController
+    requirements:
+        code: '[A-Za-z0-9_-]{1,255}'

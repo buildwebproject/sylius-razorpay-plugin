@@ -1,0 +1,48 @@
+buildwebproject_sylius_razorpay:
+    gateway_factory:
+        razorpay: Razorpay
+    form:
+        mode: Mode
+        mode_test: Test mode
+        mode_live: Live mode
+        key_id: Key ID
+        key_id_help: 'Razorpay Dashboard → Account & Settings → API Keys. Starts with rzp_test_ or rzp_live_.'
+        key_secret: Key Secret
+        secret_help: Leave empty to keep the saved secret. Secrets are stored encrypted and never shown again.
+        webhook_secret: Webhook secret
+        webhook_secret_help: 'Any random text of 16+ characters. Enter the same text when you add the webhook in Razorpay (URL: https://your-shop/payment/razorpay/webhook/PAYMENT_METHOD_CODE).'
+        methods: Payment options shown to customers
+        methods_help: Options must also be enabled on your Razorpay account.
+        method_card: Cards
+        method_upi: UPI
+        method_netbanking: Netbanking
+        method_wallet: Wallets
+        method_emi: Card EMI
+        method_cardless_emi: Cardless EMI
+        method_paylater: Pay later
+        merchant_name: Name in the payment window
+        merchant_name_help: Defaults to the channel name.
+        theme_color: Colour of the payment window
+        webhook_title: 'Webhook URL (Razorpay Dashboard → Account & Settings → Webhooks → Add new webhook)'
+        webhook_events: Active events
+    ui:
+        secure_payment: Secure payment
+        intro: The Razorpay window opens for UPI, cards and more.
+        pay_now: Pay now
+        check_status: Check payment status
+        back_to_order: Back to order
+        opening: Opening the secure payment window…
+        confirming: Confirming your payment with Razorpay…
+        paid: Payment confirmed. Taking you to your order…
+        not_confirmed_yet: The payment is not confirmed yet. Check again in a moment; please do not pay another way while it is pending.
+        attempt_failed: That payment attempt did not go through. You can try again in the payment window.
+        window_closed: The payment window was closed. Press Pay now to try again, or check the status if you already paid.
+        review: We received a payment that needs a quick check by the store. Please contact us before paying again.
+        script_failed: The payment window could not load. Check your connection and try again.
+        help: If you switch to your UPI app, come back to this page and press Check payment status.
+        needs_js: JavaScript is required for the secure payment window.
+        powered_by: Payments are processed securely by Razorpay.
+        open_from_order: Open the payment from your order page to continue.
+        session_expired: Your payment session expired. Reload the page.
+        too_many_requests: Too many attempts. Please wait a minute.
+        unknown_action: Unknown action.

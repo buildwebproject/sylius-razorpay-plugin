@@ -1,0 +1,59 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% set t = 'buildwebproject_sylius_razorpay.ui.' %}
+
+{% block title %}{{ (t ~ 'secure_payment')|trans }} | {{ parent() }}{% endblock %}
+
+{% block metatags %}
+    {{ parent() }}
+    <meta name="robots" content="noindex, nofollow">
+    {# Turbo must do a full page load so the payment script always runs. #}
+    <meta name="turbo-visit-control" content="reload">
+    <meta name="turbo-cache-control" content="no-cache">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 560px" data-turbo="false">
+    <div class="card shadow-sm">
+        <div class="card-body p-4 p-md-5 text-center"
+             id="razorpay-checkout"
+             data-endpoint="{{ path('buildwebproject_razorpay_checkout', { hash: hash, _locale: order.localeCode }) }}"
+             data-token="{{ csrf_token('buildwebproject_razorpay_' ~ hash) }}"
+             data-result="{{ result }}"
+             data-order-url="{{ path('sylius_shop_order_show', { tokenValue: order.tokenValue, _locale: order.localeCode }) }}"
+             data-msg-opening="{{ (t ~ 'opening')|trans }}"
+             data-msg-confirming="{{ (t ~ 'confirming')|trans }}"
+             data-msg-paid="{{ (t ~ 'paid')|trans }}"
+             data-msg-not-confirmed="{{ (t ~ 'not_confirmed_yet')|trans }}"
+             data-msg-failed-attempt="{{ (t ~ 'attempt_failed')|trans }}"
+             data-msg-closed="{{ (t ~ 'window_closed')|trans }}"
+             data-msg-review="{{ (t ~ 'review')|trans }}"
+             data-msg-script="{{ (t ~ 'script_failed')|trans }}">
+            <div class="mb-3 text-success" aria-hidden="true">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            </div>
+            <h1 class="h3 mb-3" id="razorpay-title">{{ (t ~ 'secure_payment')|trans }}</h1>
+            <dl class="row text-start small mb-4">
+                <dt class="col-6 text-secondary fw-normal">{{ 'sylius.ui.order'|trans }}</dt>
+                <dd class="col-6 text-end mb-1">#{{ order.number }}</dd>
+                <dt class="col-6 text-secondary fw-normal">{{ 'sylius.ui.total'|trans }}</dt>
+                <dd class="col-6 text-end mb-0 fs-5 fw-semibold">{{ payment.amount|sylius_format_money(payment.currencyCode, order.localeCode) }}</dd>
+            </dl>
+            <p id="razorpay-status" class="text-secondary" role="status" aria-live="polite">
+                {% if result == 'paid' %}{{ (t ~ 'paid')|trans }}{% elseif result == 'review' %}{{ (t ~ 'review')|trans }}{% else %}{{ (t ~ 'intro')|trans }}{% endif %}
+            </p>
+            <div class="d-grid gap-2 mt-4">
+                <button type="button" class="btn btn-primary btn-lg" id="razorpay-pay"{% if result in ['paid', 'review'] %} hidden{% endif %}>
+                    {{ (t ~ 'pay_now')|trans }}
+                </button>
+                <button type="button" class="btn btn-outline-secondary" id="razorpay-check">{{ (t ~ 'check_status')|trans }}</button>
+                <a class="btn btn-link" href="{{ path('sylius_shop_order_show', { tokenValue: order.tokenValue, _locale: order.localeCode }) }}">{{ (t ~ 'back_to_order')|trans }}</a>
+            </div>
+            <p class="small text-secondary mt-4 mb-0">{{ (t ~ 'help')|trans }}</p>
+            <noscript><p class="text-danger mt-3">{{ (t ~ 'needs_js')|trans }}</p></noscript>
+        </div>
+    </div>
+    <p class="text-center small text-secondary mt-3">{{ (t ~ 'powered_by')|trans }}</p>
+</div>
+<script src="{{ asset('bundles/buildwebprojectsyliusrazorpayplugin/checkout.js') }}?v=1" defer></script>
+{% endblock %}
