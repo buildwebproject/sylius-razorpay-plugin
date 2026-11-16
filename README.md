@@ -62,8 +62,10 @@
 1. Require the plugin:
 
    ```bash
-   composer require buildwebproject/sylius-razorpay-plugin
+   composer require buildwebproject/sylius-razorpay-plugin:^1.0@beta
    ```
+
+   (Drop `@beta` once 1.0.0 is released.)
 
 2. Register the bundle in `config/bundles.php`:
 
