@@ -62,10 +62,10 @@
 1. Require the plugin:
 
    ```bash
-   composer require buildwebproject/sylius-razorpay-plugin:^1.0@beta
+   composer require buildwebproject/sylius-razorpay-plugin:^1.0@RC
    ```
 
-   (Drop `@beta` once 1.0.0 is released.)
+   (Drop `@RC` once 1.0.0 is released.)
 
 2. Register the bundle in `config/bundles.php`:
 
@@ -116,6 +116,10 @@
 
 > **Currency**: Razorpay charges in the payment's currency. Indian accounts accept INR by default; other currencies need
 > international payments enabled on your Razorpay account.
+
+> **Phone number**: the customer's billing name, email and phone are prefilled in the Razorpay window. Razorpay only
+> accepts the phone when it looks real (best with the country code, e.g. `+919000090000`); otherwise Razorpay asks the
+> customer for it once. In test mode use `+919000090000`.
 
 ## Configuration
 
@@ -180,6 +184,9 @@ vendor/bin/phpunit
 Unit tests cover signatures, configuration validation and the API client (with a mock HTTP client). Releases are tested
 end-to-end in a Sylius 2.3 shop: admin setup (validation, secrets never rendered, secrets kept on edit), guest checkout,
 thank-you page, tampered signature refused, signed/unsigned webhooks, idempotent replays and refunds through RefundPlugin.
+1.0.0-rc.1 was also checked against a real Razorpay test account: API keys, Razorpay order creation (INR and USD),
+the live Razorpay Checkout window with prefilled customer details, refused tampered or foreign signatures, and signed
+webhooks for unknown payments ignored.
 
 ## Support
 
